@@ -1,26 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[25]:
-
-
 import bs4
 
-
-# In[190]:
-
-
 get_ipython().system('pip install selenium')
-
-
-# In[191]:
-
-
 get_ipython().system('pip install webdriver_manager')
-
-
-# In[578]:
-
 
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -28,38 +9,18 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(ChromeDriverManager(version="87.0.4280.88").install())
 driver.get("https://www.google.com")
 
-
-# In[579]:
-
-
 driver.get("https://www.zameen.com/all_locations/Islamabad-3-1-1.html")
-
-
-# In[580]:
-
 
 locations=driver.find_elements_by_xpath('//ul[@class="line-list"]/li/a')
 
-
-# In[581]:
-
-
 total_loc=len(locations)
 locations[0]
-
-
-# In[582]:
-
 
 i=0
 while(i<len(locations)):
       if(locations[i].text=="Green City" or locations[i].text=="Khanna Pul" or locations[i].text=="I-16"  or locations[i].text=="F-15"  or locations[i].text=="Jagiot Road"  or locations[i].text=="Sarai Kharbuza"):
             print(locations[i].text)
       i+=1
-
-
-# In[583]:
-
 
 start=0
 total_loc=len(locations)
@@ -106,29 +67,16 @@ while(start<total_loc):
     start+=1  
 
 
-# In[661]:
-
-
 import pandas as pd
 df = pd.DataFrame(finalanswer)
 df
 
 
-# In[662]:
-
-
 df['Id'] = df['Id'].str.replace(r'\D', '')
 df
 
-
-# In[663]:
-
-
 df['Price'] = df['Price'].str.replace('PKR\n', '')
 df.head(40)
-
-
-# In[664]:
 
 
 df['Price'] = df['Price'].str.replace('Lakh', '00000')
